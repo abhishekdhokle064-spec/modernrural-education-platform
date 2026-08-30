@@ -1,3 +1,4 @@
+import { API_URL } from '../config';
 import React, { useState, useEffect } from 'react';
 import { Search, Filter, PlayCircle, Clock, CheckCircle, Star, Award, BookOpen, ChevronRight, X, Sparkles, Building2, Layers, Check } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
@@ -43,7 +44,7 @@ export default function Courses() {
 
   const fetchCourses = () => {
     setLoading(true);
-    fetch('http://localhost:3001/api/courses')
+    fetch(`${API_URL}/api/courses`)
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data)) setCourses(data);
@@ -56,7 +57,7 @@ export default function Courses() {
   };
 
   const fetchEnrollments = () => {
-    fetch('http://localhost:3001/api/enrollments', {
+    fetch(`${API_URL}/api/enrollments`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(res => res.json())

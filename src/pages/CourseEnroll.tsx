@@ -1,3 +1,4 @@
+import { API_URL } from '../config';
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -74,7 +75,7 @@ export default function CourseEnroll() {
       }
 
       // Now persist enrollment in SQLite database
-      const enrollRes = await fetch('http://localhost:3001/api/enrollments', {
+      const enrollRes = await fetch(`${API_URL}/api/enrollments`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

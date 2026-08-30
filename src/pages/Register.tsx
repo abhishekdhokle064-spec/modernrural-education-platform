@@ -1,3 +1,4 @@
+import { API_URL } from '../config';
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -23,7 +24,7 @@ export default function Register() {
     setError('');
     
     try {
-      const res = await fetch('http://localhost:3001/api/register', {
+      const res = await fetch(`${API_URL}/api/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, password, role })
@@ -36,7 +37,7 @@ export default function Register() {
         // If user came by clicking Enroll on a specific course, auto-enroll them
         if (enrollCourseId) {
           try {
-            await fetch('http://localhost:3001/api/enrollments', {
+            await fetch(`${API_URL}/api/enrollments`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',

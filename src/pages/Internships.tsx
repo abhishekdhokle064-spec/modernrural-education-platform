@@ -1,3 +1,4 @@
+import { API_URL } from '../config';
 import React, { useState, useEffect } from 'react';
 import { Briefcase, MapPin, Building, Calendar, CheckCircle, Clock, AlertCircle, IndianRupee, Laptop, Users, Target, Search } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
@@ -38,7 +39,7 @@ export default function Internships() {
 
   const fetchInternships = async () => {
     try {
-      const res = await fetch('http://localhost:3001/api/internships');
+      const res = await fetch(`${API_URL}/api/internships`);
       const data = await res.json();
       if (Array.isArray(data)) setInternships(data);
     } catch (err) {
@@ -48,7 +49,7 @@ export default function Internships() {
 
   const fetchApplications = async () => {
     try {
-      const res = await fetch('http://localhost:3001/api/applications', {
+      const res = await fetch(`${API_URL}/api/applications`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await res.json();
@@ -61,7 +62,7 @@ export default function Internships() {
   const handleApply = async (id: number) => {
     if (!isAuthenticated) return alert(language === 'mr' ? 'अर्ज करण्यासाठी कृपया लॉगिन करा.' : language === 'hi' ? 'आवेदन के लिए कृपया लॉगिन करें।' : 'Please log in to apply.');
     try {
-      const res = await fetch('http://localhost:3001/api/applications', {
+      const res = await fetch(`${API_URL}/api/applications`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify({ internship_id: id })
@@ -88,7 +89,7 @@ export default function Internships() {
   const handlePostInternship = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:3001/api/internships', {
+      const res = await fetch(`${API_URL}/api/internships`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify(formData)

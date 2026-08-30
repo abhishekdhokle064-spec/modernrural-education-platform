@@ -1,3 +1,4 @@
+import { API_URL } from '../config';
 import React, { useState, useEffect } from 'react';
 import { Briefcase, CheckCircle, UploadCloud, PlayCircle, ShieldAlert } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
@@ -19,7 +20,7 @@ export default function Projects() {
 
   const fetchProjects = async () => {
     try {
-      const res = await fetch('http://localhost:3001/api/projects', {
+      const res = await fetch(`${API_URL}/api/projects`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await res.json();
@@ -67,7 +68,7 @@ export default function Projects() {
       
       if (res.ok) {
         // Also generate certificate
-        await fetch('http://localhost:3001/api/certificates', {
+        await fetch(`${API_URL}/api/certificates`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

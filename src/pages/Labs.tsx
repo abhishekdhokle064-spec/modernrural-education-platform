@@ -1,3 +1,4 @@
+import { API_URL } from '../config';
 import React, { useState, useEffect } from 'react';
 import { MapPin, Calendar, Clock, Monitor, FlaskConical, Cpu, Users, ArrowRight, CheckCircle, Search, Filter, Sparkles, X, Info, ShieldCheck, Wrench, Trash2 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
@@ -40,7 +41,7 @@ export default function Labs() {
 
   const fetchLabs = () => {
     setLoading(true);
-    fetch('http://localhost:3001/api/labs')
+    fetch(`${API_URL}/api/labs`)
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data)) setLabs(data);
@@ -53,7 +54,7 @@ export default function Labs() {
   };
 
   const fetchBookings = () => {
-    fetch('http://localhost:3001/api/bookings', {
+    fetch(`${API_URL}/api/bookings`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(res => res.json())
@@ -77,7 +78,7 @@ export default function Labs() {
         return;
       }
       try {
-        const res = await fetch('http://localhost:3001/api/bookings', {
+        const res = await fetch(`${API_URL}/api/bookings`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

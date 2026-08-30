@@ -1,3 +1,4 @@
+import { API_URL } from '../config';
 import React, { useState, useEffect } from 'react';
 import { Award, BookOpen, CheckCircle, Clock, Zap, Target, TrendingUp, Save, MapPin, GraduationCap, Link as LinkIcon, Briefcase } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
@@ -50,7 +51,7 @@ export default function Progress() {
       });
       
       // Fetch enrollments
-      fetch('http://localhost:3001/api/enrollments', {
+      fetch(`${API_URL}/api/enrollments`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(res => res.json())
@@ -60,7 +61,7 @@ export default function Progress() {
       .catch(console.error);
       
       // Fetch lab bookings
-      fetch('http://localhost:3001/api/bookings', {
+      fetch(`${API_URL}/api/bookings`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(res => res.json())
@@ -70,7 +71,7 @@ export default function Progress() {
       .catch(console.error);
 
       // Fetch certificates
-      fetch('http://localhost:3001/api/certificates', {
+      fetch(`${API_URL}/api/certificates`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(res => res.json())
@@ -81,7 +82,7 @@ export default function Progress() {
 
       // Fetch Trainer Data
       if (user.role === 'Trainer' || user.role === 'Admin') {
-        fetch('http://localhost:3001/api/trainer/students', {
+        fetch(`${API_URL}/api/trainer/students`, {
           headers: { Authorization: `Bearer ${token}` }
         })
         .then(res => res.json())
@@ -93,7 +94,7 @@ export default function Progress() {
 
       // Fetch Recruiter Data
       if (user.role === 'Recruiter' || user.role === 'Admin') {
-        fetch('http://localhost:3001/api/recruiter/applicants', {
+        fetch(`${API_URL}/api/recruiter/applicants`, {
           headers: { Authorization: `Bearer ${token}` }
         })
         .then(res => res.json())
@@ -105,7 +106,7 @@ export default function Progress() {
 
       // Fetch Admin Data
       if (user.role === 'Admin') {
-        fetch('http://localhost:3001/api/admin/users', {
+        fetch(`${API_URL}/api/admin/users`, {
           headers: { Authorization: `Bearer ${token}` }
         })
         .then(res => res.json())
@@ -114,7 +115,7 @@ export default function Progress() {
         })
         .catch(console.error);
 
-        fetch('http://localhost:3001/api/admin/stats', {
+        fetch(`${API_URL}/api/admin/stats`, {
           headers: { Authorization: `Bearer ${token}` }
         })
         .then(res => res.json())
@@ -139,7 +140,7 @@ export default function Progress() {
 
   const handleSave = async () => {
     try {
-      const res = await fetch('http://localhost:3001/api/profile', {
+      const res = await fetch(`${API_URL}/api/profile`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

@@ -1,3 +1,4 @@
+import { API_URL } from '../config';
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 export interface User {
@@ -47,7 +48,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const fetchProfile = async (currentToken: string) => {
     try {
-      const res = await fetch('http://localhost:3001/api/profile', {
+      const res = await fetch(`${API_URL}/api/profile`, {
         headers: { Authorization: `Bearer ${currentToken}` }
       });
       if (res.ok) {

@@ -1,3 +1,4 @@
+import { API_URL } from '../config';
 import React, { useState, useEffect } from 'react';
 import { Bell, CheckCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -9,7 +10,7 @@ export default function Notifications() {
 
   useEffect(() => {
     if (isAuthenticated && token) {
-      fetch('http://localhost:3001/api/notifications', {
+      fetch(`${API_URL}/api/notifications`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(res => res.json())

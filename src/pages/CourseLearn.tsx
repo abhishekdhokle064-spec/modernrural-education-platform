@@ -1,3 +1,4 @@
+import { API_URL } from '../config';
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -52,7 +53,7 @@ export default function CourseLearn() {
         });
 
       // Fetch enrollment
-      fetch('http://localhost:3001/api/enrollments', {
+      fetch(`${API_URL}/api/enrollments`, {
         headers: { Authorization: `Bearer ${token}` }
       })
         .then(res => res.json())
